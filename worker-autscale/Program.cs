@@ -1,4 +1,5 @@
 using worker_autscale;
+using worker_autscale.services;
 
 var builder = Host.CreateApplicationBuilder(args);
 

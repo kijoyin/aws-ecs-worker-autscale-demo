@@ -1,7 +1,7 @@
 using Amazon.CloudWatch.EMF.Logger;
 using Amazon.CloudWatch.EMF.Model;
 
-namespace worker_autscale
+namespace worker_autscale.services
 {
     public interface IMetricsService
     {

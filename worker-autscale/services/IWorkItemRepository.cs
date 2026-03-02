@@ -1,4 +1,6 @@
-namespace worker_autscale
+using worker_autscale.models;
+
+namespace worker_autscale.services
 {
     public interface IWorkItemRepository
     {

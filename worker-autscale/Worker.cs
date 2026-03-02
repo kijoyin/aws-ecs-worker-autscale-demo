@@ -1,3 +1,5 @@
+using worker_autscale.services;
+
 namespace worker_autscale
 {
     public class Worker : BackgroundService

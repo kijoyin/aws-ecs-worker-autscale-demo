@@ -1,4 +1,4 @@
-namespace worker_autscale
+namespace worker_autscale.models
 {
     public class WorkItem
     {
