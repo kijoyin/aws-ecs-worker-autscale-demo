@@ -31,26 +31,19 @@ namespace worker_autscale
             {
                 var metricsLogger = new MetricsLogger();
 
-                // Set namespace for the metrics
                 metricsLogger.SetNamespace(_namespace);
 
-                // Add dimensions
                 var dimensions = new DimensionSet();
                 dimensions.AddDimension("Service", _serviceName);
                 dimensions.AddDimension("Environment", GetEnvironment());
                 metricsLogger.SetDimensions(dimensions);
 
-                // Add the custom metric for unprocessed items count
                 metricsLogger.PutMetric("UnprocessedItemsCount", unprocessedCount, Unit.COUNT);
-
-                // Add additional metrics
                 metricsLogger.PutMetric("WorkerHealthy", 1, Unit.COUNT);
 
-                // Add properties for context
                 metricsLogger.PutProperty("Timestamp", DateTimeOffset.UtcNow.ToString("o"));
                 metricsLogger.PutProperty("ServiceVersion", "1.0.0");
 
-                // Flush metrics to CloudWatch
                 metricsLogger.Flush();
 
                 _logger.LogDebug("Published EMF metrics - UnprocessedItemsCount: {unprocessedCount}", unprocessedCount);

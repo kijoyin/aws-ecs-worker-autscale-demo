@@ -23,7 +23,6 @@ namespace worker_autscale
         {
             try
             {
-                // Fetch a batch of items from the database
                 var items = await _repository.GetBatchAsync(_batchSize, cancellationToken);
 
                 if (items.Count == 0)
@@ -34,7 +33,6 @@ namespace worker_autscale
 
                 _logger.LogInformation("Processing batch of {count} items", items.Count);
 
-                // Process each item
                 var processedIds = new List<int>();
                 foreach (var item in items)
                 {
@@ -42,7 +40,6 @@ namespace worker_autscale
                     processedIds.Add(item.Id);
                 }
 
-                // Mark items as processed in the database
                 await _repository.MarkAsProcessedAsync(processedIds, cancellationToken);
 
                 _logger.LogInformation("Successfully processed {count} items", processedIds.Count);
@@ -57,10 +54,8 @@ namespace worker_autscale
 
         private async Task ProcessItemAsync(WorkItem item, CancellationToken cancellationToken)
         {
-            // Simulate processing time (500ms to 2000ms per item)
             var processingTime = _random.Next(500, 2001);
             await Task.Delay(processingTime, cancellationToken);
-
             _logger.LogDebug("Processed item {itemId}: {data}", item.Id, item.Data);
         }
     }
